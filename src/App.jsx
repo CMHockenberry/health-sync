@@ -41,12 +41,19 @@ const ENCOURAGEMENTS = [
 ];
 
 function uid() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
-function todayStr() { return new Date().toISOString().slice(0, 10); }
-function nowTime() { return new Date().toISOString().slice(11, 16); }
+function pad2(n) { return String(n).padStart(2, "0"); }
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+}
+function nowTime() {
+  const d = new Date();
+  return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+}
 function dateShift(dateStr, days) {
   const d = new Date(dateStr + "T00:00:00");
   d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
+  return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
 }
 
 // ---------- storage ----------
